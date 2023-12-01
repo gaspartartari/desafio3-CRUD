@@ -1,0 +1,10 @@
+INSERT INTO tb_client (name, cpf, income, birth_date, children) VALUES ('Joseph Kindle', '02498560009', 2000.00, '1989-12-01', 2 );
+INSERT INTO tb_client (name, cpf, income, birth_date, children) VALUES ('Marta Johnson', '11023499222', 40000.00, '1992-10-01', 5 );
+INSERT INTO tb_client (name, cpf, income, birth_date, children) VALUES ('Jeff Bezos', '0245679801', 200000.00, '1986-05-02', 1 );
+INSERT INTO tb_client (name, cpf, income, birth_date, children) VALUES ('Allan Wats', '03456765422', 100000.00, '1942-01-10', 0 );
+INSERT INTO tb_client (name, cpf, income, birth_date, children) VALUES ('Gaspar Tartari', '13454367865', 50000.00, '1989-05-16', 2 );
+INSERT INTO tb_client (name, cpf, income, birth_date, children) VALUES ('Carolina Dutra', '02495560007', 60000.00, '1992-05-07', 0 );
+INSERT INTO tb_client (name, cpf, income, birth_date, children) VALUES ('Adrew Mathews', '11100099933', 3000.00, '1995-12-1', 4 );
+INSERT INTO tb_client (name, cpf, income, birth_date, children) VALUES ('Beth Hamilton', '00954312354', 2000.00, '1985-10-18', 0 );
+INSERT INTO tb_client (name, cpf, income, birth_date, children) VALUES ('Ben Affleck', '00065487678', 500000.00, '1982-12-1', 3 );
+INSERT INTO tb_client (name, cpf, income, birth_date, children) VALUES ('Scarlet Yohanson', '65498765498', 300000.00, '1982-01-09', 2 );
