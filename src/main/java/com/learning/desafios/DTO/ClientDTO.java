@@ -14,6 +14,10 @@ public class ClientDTO {
     private LocalDate birthDate;
     private Integer children;
 
+    public ClientDTO(){
+        
+    }
+
     public ClientDTO(Client client) {
         BeanUtils.copyProperties(client, this);
     }
