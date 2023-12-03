@@ -6,11 +6,20 @@ import org.springframework.beans.BeanUtils;
 
 import com.learning.desafios.entities.Client;
 
+
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.PastOrPresent;
+
+
 public class ClientDTO {
     private Long id;
+
+    @NotEmpty(message = "name canot be empty")
     private String name;
     private String cpf;
     private Double income;
+
+    @PastOrPresent(message = "Birthdate must be past or present")
     private LocalDate birthDate;
     private Integer children;
 

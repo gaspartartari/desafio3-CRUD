@@ -19,6 +19,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.learning.desafios.DTO.ClientDTO;
 import com.learning.desafios.services.ClientService;
 
+import jakarta.validation.Valid;
+
 
 @RestController
 @RequestMapping(value = "/clients")
@@ -34,12 +36,12 @@ public class ClientController {
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<ClientDTO> findById(@PathVariable Long id){
-        ClientDTO resutl = service.findById(id).get();
+        ClientDTO resutl = service.findById(id);
         return ResponseEntity.ok(resutl);
     }
 
     @PostMapping
-    public ResponseEntity<ClientDTO> insert(@RequestBody ClientDTO dto){
+    public ResponseEntity<ClientDTO> insert(@Valid @RequestBody ClientDTO dto){
         dto = service.insert(dto);
         //personalize API response to 201 code
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
@@ -47,9 +49,9 @@ public class ClientController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<ClientDTO> update(@PathVariable Long id, @RequestBody ClientDTO dto){
-        ClientDTO result = service.update(id, dto);
-        return ResponseEntity.ok(result);
+    public ResponseEntity<ClientDTO> update(@PathVariable Long id, @Valid @RequestBody ClientDTO dto){
+        dto = service.update(id, dto);
+        return ResponseEntity.ok(dto);
     }
 
     @DeleteMapping(value = "/{id}")

@@ -1,6 +1,5 @@
 package com.learning.desafios.services;
 
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -10,6 +9,11 @@ import org.springframework.transaction.annotation.Transactional;
 import com.learning.desafios.DTO.ClientDTO;
 import com.learning.desafios.entities.Client;
 import com.learning.desafios.repositories.ClientRepository;
+import com.learning.desafios.services.exceptions.ResourceNotfoundException;
+
+import jakarta.persistence.EntityNotFoundException;
+
+
 
 @Service
 public class ClientService {
@@ -24,9 +28,9 @@ public class ClientService {
     }
 
     @Transactional(readOnly = true)
-    public Optional<ClientDTO> findById(Long id){
-        Optional<Client> result = repository.findById(id);
-        return result.map(x -> new ClientDTO(x));
+    public ClientDTO findById(Long id){
+        Client result = repository.findById(id).orElseThrow(() -> new ResourceNotfoundException("Resource not found"));
+        return new ClientDTO(result);
     }
 
     @Transactional
@@ -39,13 +43,21 @@ public class ClientService {
 
     @Transactional
     public ClientDTO update(Long id, ClientDTO dto){
-        Client entity = repository.getReferenceById(id);
-        copyDtoToEntity(dto, entity);
-        return new ClientDTO(entity);
+        try {
+            Client entity = repository.getReferenceById(id);
+            copyDtoToEntity(dto, entity);
+            entity = repository.save(entity);
+            return new ClientDTO(entity);
+        } 
+        catch (EntityNotFoundException e) {
+            throw new ResourceNotfoundException("Entity not found");
+        }
     }
 
     @Transactional
     public void delete(Long id){
+        if(!repository.existsById(id))
+            throw new ResourceNotfoundException("Entity not found");
         repository.deleteById(id);
     }
 
